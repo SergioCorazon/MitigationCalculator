@@ -1,6 +1,6 @@
 ﻿namespace MitigationCalculator.Models
 {
-    //hola
+    //holaa
     public class Mitigation
     {
     }
