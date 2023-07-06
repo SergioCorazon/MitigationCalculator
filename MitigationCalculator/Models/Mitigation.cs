@@ -2,8 +2,7 @@
 
 namespace MitigationCalculator.Models
 {
-    //TODO: Add fields for the class
-    //such as "percent" "type of damage" "shield" etc.
+    //TODO: Add comments!
     public class Mitigation
     {
         public Mitigation(string _Name) { this.Name = _Name; }

@@ -1,9 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MitigationCalculator.Models;
+using Newtonsoft.Json;
 
-//TODO: solve issues that break the application
-//Return to the client the data of all avaible mitigations
-
+//TODO: ADD COMMENTS!
 
 namespace MitigationCalculator.Controllers
 {
@@ -21,13 +20,15 @@ namespace MitigationCalculator.Controllers
         [HttpGet]
         public IList<Mitigation> Get()
         {
-            IList<Mitigation> mitigationList = new List<Mitigation>();
-            Mitigation feint = new Mitigation("Feint");
-            feint.BossMagicDDownPerc = 5;
-            feint.BossPhysicalDDownPerc = 10;
-            mitigationList.Add(feint);
-      
-            return mitigationList;
+            string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
+            string sFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Assets\Mitigations.json");
+            string filePath = Path.GetFullPath(sFile);
+            using StreamReader reader = new(filePath);
+            var json = reader.ReadToEnd();
+            List<Mitigation>? mitigationshollyfuck = JsonConvert.DeserializeObject<List<Mitigation>>(json);
+            if (mitigationshollyfuck is not null) return mitigationshollyfuck;
+            return new List<Mitigation>();
         }
+
     }
 }
