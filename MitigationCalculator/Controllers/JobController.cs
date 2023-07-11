@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using MitigationCalculator.Models;
 using MitigationCalculator.Services;
+using System;
 using System.Collections.Generic;
 
 namespace MitigationCalculator.Controllers
@@ -28,8 +29,26 @@ namespace MitigationCalculator.Controllers
             IList<Mitigation> mitigationList = mitigationService.GetDataFromJson();
             JobService jobService = new JobService();
             IList<SimplifiedJob> jobList = jobService.GetDataFromJson();
-
-            return null;
+            IList<Job> finalJobList = new List<Job>();
+            //TODO: DO IT WITH FOREACHS OR DO WHILES OR WHATEVER A LOOP
+            //finalJobList = jobList.Select(i => new Job
+            //       (i.JobName,
+            //        mitigationList.Select(j => new Mitigation(j.Name)
+            //        {
+            //            Name = j.Name,
+            //            BossFlatDDownPerc = j.BossFlatDDownPerc,
+            //            BossMagicDDownPerc = j.BossMagicDDownPerc,
+            //            BossPhysicalDDownPerc = j.BossPhysicalDDownPerc,
+            //            PartyFlatDefPerc = j.PartyPhysicalDefPerc,
+            //            PartyMagicDefPerc = j.PartyPhysicalDefPerc,
+            //            PartyPhysicalDefPerc = j.PartyPhysicalDefPerc,
+            //            Shield = j.Shield
+            //        })
+            //        .Where(k => i.Mitsnames.Contains(k.Name))
+            //   )
+            //)
+            //   .ToArray();
+            return finalJobList;
         }
     }
 }
