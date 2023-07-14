@@ -10,10 +10,6 @@ namespace MitigationCalculator.Controllers
     [Route("[controller]")]
     public class JobController : ControllerBase
     {
-        private static readonly string[] JobNameList = new[]
-        {
-        "White Mage", "Black Mage", "Dragoon", "Dark Knight",
-    };
 
         private readonly ILogger<JobController> _logger;
 
@@ -30,6 +26,62 @@ namespace MitigationCalculator.Controllers
             JobService jobService = new JobService();
             IList<SimplifiedJob> jobList = jobService.GetDataFromJson();
             IList<Job> finalJobList = new List<Job>();
+
+            //Recorrer cada elemento de la lista de jobs
+            //Comparar los nombres de las mitigaciones de cada job con los de MitList
+            //crear un objeto de job por cada simplified job
+            //volcar los datos del simplified job y de las mitigaciones del mitlist en el objeto job.
+            //Sustituir los mits de la lista con los datos de la mitlist
+            //añadir el objeto job al listado de objetos job llamado final job list
+
+
+            //foreach (SimplifiedJob i in jobList)
+            //{
+            //    Job tempJob = new Job();
+            //    IList<Mitigation> tempMitigationList = new List<Mitigation>();
+            //    foreach (string j in i.Mitsnames)
+            //    {
+            //        foreach (Mitigation k in mitigationList)
+            //        {
+            //            if (k.Name == j)
+            //            {
+            //                tempMitigationList.Add(k);
+            //            }
+            //        }
+            //    }
+            //    tempJob.Name = i.JobName;
+            //    tempJob.Mitigations = tempMitigationList;
+            //    finalJobList.Add(tempJob);
+            //}
+
+            //find the same mits on each list, mit and job.
+            //replace the found simple mits for the complex mits on the new finaljoblist.
+
+            finalJobList = jobList.Select(i => new Job(
+                i.JobName, mitigationList.Where(j => i.Mitsnames.Contains(j.Name))
+            )).ToArray();
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             //TODO: DO IT WITH FOREACHS OR DO WHILES OR WHATEVER A LOOP
             //finalJobList = jobList.Select(i => new Job
             //       (i.JobName,

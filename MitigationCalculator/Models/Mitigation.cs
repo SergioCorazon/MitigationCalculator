@@ -13,13 +13,13 @@ namespace MitigationCalculator.Models
         
         public int BossFlatDDownPerc{ get; set; }
 
-        public int PartyMagicDefPerc{ get; set; } 
+        public int PartyMagicDefPerc{ get; set; }
 
         public int PartyPhysicalDefPerc { get; set; }
 
         public int PartyFlatDefPerc { get; set; }
 
-        public int Shield{ get; set; }
-        
+        public int Shield { get; set; }
+
     }
 }
