@@ -22,7 +22,7 @@ namespace MitigationCalculator.Controllers
         public IList<Mitigation> Get()
         {
             MitigationService service = new MitigationService();
-            return service.GetDataFromJson();
+            return service.GetAllMitigations();
         }
     }
 }

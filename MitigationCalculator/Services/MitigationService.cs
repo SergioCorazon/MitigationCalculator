@@ -5,7 +5,31 @@ namespace MitigationCalculator.Services
 {
     public class MitigationService
     {
-        public IList<Mitigation> GetDataFromJson() {
+        private IList<Mitigation> mitigationList = new List<Mitigation>();
+        public MitigationService() {
+            mitigationList = GetDataFromJson();
+        }
+
+        //Get the mittigation given a name.
+
+        public Mitigation GetMitigationByName(string name)
+        {
+            return mitigationList.Where(i => i.Name == name).FirstOrDefault();
+        }
+
+        //Get the mitigations of a job.
+        public IList<Mitigation> GetMitigationBySimplifiedJob(SimplifiedJob job)
+        {
+            return mitigationList.Where(i => job.Mitsnames.Contains(i.Name)).ToList();
+        }
+
+        public IList<Mitigation> GetAllMitigations()
+        {
+            return this.mitigationList;
+        }
+
+
+        private IList<Mitigation> GetDataFromJson() {
             string sCurrentDirectory = AppDomain.CurrentDomain.BaseDirectory;
             string sFile = System.IO.Path.Combine(sCurrentDirectory, @"..\..\..\Assets\Mitigations.json");
             string filePath = Path.GetFullPath(sFile);

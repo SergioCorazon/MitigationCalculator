@@ -21,11 +21,12 @@ namespace MitigationCalculator.Controllers
         [HttpGet]
         public IEnumerable<Job> Get()
         {
-            MitigationService mitigationService = new MitigationService();
-            IList<Mitigation> mitigationList = mitigationService.GetDataFromJson();
+            //MitigationService mitigationService = new MitigationService();
+            
             JobService jobService = new JobService();
-            IList<SimplifiedJob> jobList = jobService.GetDataFromJson();
-            IList<Job> finalJobList = new List<Job>();
+            
+            //IList<SimplifiedJob> jobList = jobService.GetDataFromJson();
+            //IList<Job> finalJobList = new List<Job>();
 
             //Recorrer cada elemento de la lista de jobs
             //Comparar los nombres de las mitigaciones de cada job con los de MitList
@@ -57,50 +58,11 @@ namespace MitigationCalculator.Controllers
             //find the same mits on each list, mit and job.
             //replace the found simple mits for the complex mits on the new finaljoblist.
 
-            finalJobList = jobList.Select(i => new Job(
-                i.JobName, mitigationList.Where(j => i.Mitsnames.Contains(j.Name))
-            )).ToArray();
+            //finalJobList = jobList.Select(i => new Job(
+            //    i.JobName, mitigationService.GetMitigationBySimplifiedJob(i)
+            //)).ToArray();
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-            //TODO: DO IT WITH FOREACHS OR DO WHILES OR WHATEVER A LOOP
-            //finalJobList = jobList.Select(i => new Job
-            //       (i.JobName,
-            //        mitigationList.Select(j => new Mitigation(j.Name)
-            //        {
-            //            Name = j.Name,
-            //            BossFlatDDownPerc = j.BossFlatDDownPerc,
-            //            BossMagicDDownPerc = j.BossMagicDDownPerc,
-            //            BossPhysicalDDownPerc = j.BossPhysicalDDownPerc,
-            //            PartyFlatDefPerc = j.PartyPhysicalDefPerc,
-            //            PartyMagicDefPerc = j.PartyPhysicalDefPerc,
-            //            PartyPhysicalDefPerc = j.PartyPhysicalDefPerc,
-            //            Shield = j.Shield
-            //        })
-            //        .Where(k => i.Mitsnames.Contains(k.Name))
-            //   )
-            //)
-            //   .ToArray();
-            return finalJobList;
+            return jobService.GetJobs();
         }
     }
 }
