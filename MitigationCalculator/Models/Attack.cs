@@ -10,5 +10,7 @@
 
         public int BossFlatDamage { get; set; }
 
+        public Tier Tier { get; set; }
+
     }
 }
