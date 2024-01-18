@@ -1,13 +1,43 @@
-﻿using MitigationCalculator.Models;
+﻿using System.Runtime.Intrinsics.X86;
+using MitigationCalculator.Models;
 using Newtonsoft.Json;
 
 namespace MitigationCalculator.Services
 {
     public class MitigationService
     {
-        private IList<Mitigation> mitigationList = new List<Mitigation>();
+        public IList<Mitigation> mitigationList = new List<Mitigation>();
         public MitigationService() {
             mitigationList = GetDataFromJson();
+        }
+
+        public string ReadMitigationFromJsonAndInsertIntoSQL()
+        {
+            IList<Mitigation> auxList = new List<Mitigation>();
+            auxList = GetDataFromJson();
+            string sql = "INSERT INTO MITIGATION(MITNAME, BOSSMAGICDDPERC, BOSSPHYSICALDDPERC, BOSSFLATDDPERC, PARTYMAGICDEFPERC," +
+                    "PARTYPHYSICALDEFPERC, SHIELD) VALUES";
+            //string sql2 = "('{0}',{1},{2},{3},{4},{5},{6}),";
+
+            foreach (var aux in auxList)
+            {
+                sql += "('" + aux.Name + "', " + aux.BossMagicDDownPerc + ", " + aux.BossPhysicalDDownPerc + ", " + aux.BossFlatDDownPerc +
+                    ", " + aux.PartyMagicDefPerc + ", " + aux.PartyPhysicalDefPerc + ", " + aux.Shield + "),";
+                //sql2 = string.Format(sql2, aux.Name, aux.BossMagicDDownPerc, aux.BossPhysicalDDownPerc, aux.BossFlatDDownPerc, aux.PartyMagicDefPerc, aux.PartyPhysicalDefPerc, aux.Shield);
+            }
+
+            sql = sql.Substring(0, sql.Length - 1) + ";";
+            return sql;
+
+            //int x = 0;
+            //int y = auxList.Count;
+            //auxList.Distinct().ToList().ForEach(aux => {
+            //    x++;
+            //    //auxList.Select(aux =>
+            //    sql2= string.Format(sql2, aux.Name, aux.BossMagicDDownPerc, aux.BossPhysicalDDownPerc, aux.BossFlatDDownPerc, aux.PartyMagicDefPerc, aux.PartyPhysicalDefPerc, aux.Shield);
+            //});
+            //return sql + (sql2.Substring(0, sql2.Length - 1) + ";");
+
         }
 
         //Get the mittigation given a name.
@@ -22,7 +52,6 @@ namespace MitigationCalculator.Services
         {
             return mitigationList.Where(i => job.Mitsnames.Contains(i.Name)).ToList();
         }
-
         public IList<Mitigation> GetAllMitigations()
         {
             return this.mitigationList;
