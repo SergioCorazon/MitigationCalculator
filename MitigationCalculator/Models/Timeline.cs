@@ -12,6 +12,8 @@
         public int EnrageTime { get; set; }
         public IList<Attack> ListOfAttacks { get; set; }
 
+        public IList<AppliedMitigation> ListOfAppliedMitigations { get; set; }
+
         public IList<MitigatedAttacks> ListOfMitigatedAttacks { get; set; }
 
         public Tier Tier { get; set; }
