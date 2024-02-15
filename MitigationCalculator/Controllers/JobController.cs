@@ -24,7 +24,7 @@ namespace MitigationCalculator.Controllers
             //MitigationService mitigationService = new MitigationService();
             
             JobService jobService = new JobService();
-            
+
             //IList<SimplifiedJob> jobList = jobService.GetDataFromJson();
             //IList<Job> finalJobList = new List<Job>();
 
@@ -61,6 +61,8 @@ namespace MitigationCalculator.Controllers
             //finalJobList = jobList.Select(i => new Job(
             //    i.JobName, mitigationService.GetMitigationBySimplifiedJob(i)
             //)).ToArray();
+
+            string test = jobService.Insertjobmitigation();
 
             return jobService.GetJobs();
         }

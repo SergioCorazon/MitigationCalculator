@@ -18,11 +18,17 @@ namespace MitigationCalculator.Controllers
             _logger = logger;
         }
 
+        //[HttpGet]
+        //public IList<Mitigation> Get()
+        //{
+        //    MitigationService service = new MitigationService();
+        //    return service.GetAllMitigations();
+        //}
         [HttpGet]
-        public IList<Mitigation> Get()
+        public string Get()
         {
             MitigationService service = new MitigationService();
-            return service.GetAllMitigations();
+            return service.ReadMitigationFromJsonAndInsertIntoSQL();
         }
     }
 }
